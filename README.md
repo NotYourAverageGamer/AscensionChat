@@ -145,3 +145,28 @@ Even though this bot does not do anything malicious, some servers may not like a
 
 - Download the [**latest**](https://github.com/NotYourAverageGamer/AscensionChat/releases/latest) `ascensionchat.jar` and replace the one in your current `ascensionchat` folder. Alternatively, download the [**latest**](https://github.com/NotYourAverageGamer/AscensionChat/releases/latest) `ascensionchat.zip` file; but be careful not to replace your `ascensionchat.conf`!
   - Before updating your `ascension.conf` file, make sure to save a copy of your current `.conf` file. This will allow you to easily transfer your login details to the new config, making the update process smoother.
+
+## Tested OS's
+
+#### This project succesfully compiled and ran on the following Operating Systems (bare-metal, no VM's used)
+
+- **MacOS**
+
+  - **MacOS Ventura** 13.6.7 (13" Early '15 MacBook Air with OpenCore Legacy Patcher)
+    - [SDKMAN!](https://sdkman.io/) one-line install from their site (same across all systems)
+    - Scala (2.12.19) installed with SDKMAN!
+
+- **Linux**
+
+  - **Arch** (rolling, x86_64, Linux 6.6.37-1-lts)
+    - Java (21.0.3-tem), Scala (2.12.19) and Maven (3.9.8) installed with SDKMAN!
+  - **Mint** Virginia 21.3 (x86_64, Linux 5.15.0-113-generic)
+    - Scala (2.12.19) and Java (21.0.3-tem) installed with SDKMAN!
+    - Maven from the `apt` repository
+
+- **Windows**
+
+  - **Windows 10 Pro** (22H2, 19045.4529)
+    - You will want to use `Windows Terminal` (_which you might not have by default_), because the default `Windows Console Host` does not support the ANSI Escape Sequences used in this project. This results in the Escape Codes showing in the terminal and no colour, making terminal output harder to read. Fortunately, this is pretty straightforward to setup. See [**HERE**](https://learn.microsoft.com/en-us/windows/terminal/install) for steps to setup/install.
+  - **Windows 11 Pro** (23H2, 22631.3737)
+  - **WSL - Ubuntu 22.04** (on Win11-Pro)

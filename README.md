@@ -133,8 +133,8 @@ Even though this bot does not do anything malicious, some servers may not like a
 
    - You may need to restart your terminal for the install/upgrade to take effect.
 
-3. Run `mvn clean package` which will produce a file in the target folder called `ascensionchat-3.1.1.zip`
-4. Unzip `ascensionchat-3.1.1.zip`, edit the configuration file, and run `run.bat` for Windows or `run.sh` for Linux/MacOS. (Edit the name of the config file in `run.*` if you supply your own config)
+3. Run `mvn clean package` which will produce a file in the target folder called `ascensionchat-3.1.2.zip`
+4. Unzip `ascensionchat-3.1.2.zip`, edit the configuration file, and run `run.bat` for Windows or `run.sh` for Linux/MacOS. (Edit the name of the config file in `run.*` if you supply your own config)
    - If no config file is supplied, the bot will try to use `ascensionchat.conf`
 
 ## Updating

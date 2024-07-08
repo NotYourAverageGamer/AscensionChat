@@ -42,9 +42,10 @@ Even though this bot does not do anything malicious, some servers may not like a
 
 ![guild-chat-construct](https://raw.githubusercontent.com/fjaros/wowchat/master/images/example2.png)
 
-## Setup & Prerequisites
+## Setup Discord Bot
 
 1. Create a Discord Bot on your Discord account:
+
    - Go to <https://discordapp.com/developers/applications/>
    - Sign into your Discord account if necessary, and click `Create an application`
    - Change the application name to something meaningful like "WoW Chat"
@@ -53,7 +54,16 @@ Even though this bot does not do anything malicious, some servers may not like a
    - Disable the `Public Bot` option
    - Enable `PRESENCE INTENT`, `SERVER MEMBERS INTENT` and `MESSAGE CONTENT INTENT` under `Privileged Gateway Intents`. **This is important! Without it, your bot will not work!**
    - Underneath where it says `TOKEN`, click `Copy`. _(If you can't see a copy option, click reset then copy)_ This is what Ascension Chat will use to log into Discord.
-2. Configure AscensionChat by opening `ascensionchat.conf` in your text editor of choice. You can also create your own file using the supplied `ascensionchat.conf` as a template.
+
+2. Invite your bot to Discord:
+   - Go back to <https://discordapp.com/developers/applications/> and click your new Bot application.
+   - In the browser, enter: <https://discordapp.com/oauth2/authorize?client_id=CLIENT_ID&scope=bot>
+     - Replace **`CLIENT_ID`** (the one in CAPS) in the URL with the token from the Discord applications page earlier.
+   - Assign the bot the necessary Discord roles/permissions to view/enter your desired channels.
+
+## Configure ascensionchat.conf
+
+1. Configure AscensionChat by opening `ascensionchat.conf` in your preferred text editor. You can also create your own file using the supplied `ascensionchat.conf` as a template.
 
    - **Discord** section:
      - `token`: Paste the `Bot token` you copied above.
@@ -99,13 +109,7 @@ Even though this bot does not do anything malicious, some servers may not like a
      - `patterns`: List of Java Regex match patterns. If the incoming message matches any one of the patterns and filters are enabled, it will be ignored.
        - When ignored, the message will not be relayed; however, it will be logged into the bot's command line output prepended with the word FILTERED.
 
-3. Invite your bot to Discord:
-   - Go back to <https://discordapp.com/developers/applications/> and click your new Bot application.
-   - In the browser, enter: <https://discordapp.com/oauth2/authorize?client_id=CLIENT_ID&scope=bot>
-     - Replace **`CLIENT_ID`** (the one in CAPS) in the URL with the token from the Discord applications page earlier.
-   - Assign the bot the necessary Discord roles/permissions to view/enter your desired channels.
-
-## Run
+## Running AscensionChat
 
 1. Download the [**latest**](https://github.com/NotYourAverageGamer/AscensionChat/releases/latest) ready-made binary from the GitHub [releases](https://github.com/NotYourAverageGamer/AscensionChat/releases)
 

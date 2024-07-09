@@ -6,7 +6,7 @@
 
     <groupId>ascensionchat</groupId>
     <artifactId>ascensionchat</artifactId>
-    <version>3.1.2</version>
+    <version>3.2.0</version>
 
     <properties>
         <java.version>1.8</java.version>
@@ -51,7 +51,7 @@
         <dependency>
             <groupId>net.dv8tion</groupId>
             <artifactId>JDA</artifactId>
-            <version>4.4.0_352</version>
+            <version>5.0.0</version>
             <exclusions>
                 <exclusion>
                     <groupId>club.minnced</groupId>
@@ -125,6 +125,7 @@
                                 <exclude>META-INF/*.SF</exclude>
                                 <exclude>META-INF/*.DSA</exclude>
                                 <exclude>META-INF/*.RSA</exclude>
+                                <exclude>**/module-info.class</exclude>
                                 <exclude>logback.xml</exclude>
                                 <exclude>*.conf</exclude>
                             </excludes>
@@ -159,14 +160,14 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-resources-plugin</artifactId>
+              <version>3.3.1</version>
+              <configuration>
+                <propertiesEncoding>UTF-8</propertiesEncoding>
+              </configuration>
+            </plugin>
         </plugins>
     </build>
-
-    <repositories>
-        <repository>
-            <id>dv8tion</id>
-            <name>m2-dv8tion</name>
-            <url>https://m2.dv8tion.net/releases</url>
-        </repository>
-    </repositories>
 </project>

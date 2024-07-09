@@ -8,9 +8,11 @@ import com.typesafe.scalalogging.StrictLogging
 import com.vdurmont.emoji.EmojiParser
 import net.dv8tion.jda.api.JDABuilder
 import net.dv8tion.jda.api.JDA.Status
-import net.dv8tion.jda.api.entities.{Activity, ChannelType, MessageType}
+import net.dv8tion.jda.api.entities.channel.ChannelType
+import net.dv8tion.jda.api.entities.{Activity, MessageType}
 import net.dv8tion.jda.api.entities.Activity.ActivityType
-import net.dv8tion.jda.api.events.{ShutdownEvent, StatusChangeEvent}
+import net.dv8tion.jda.api.events.StatusChangeEvent
+import net.dv8tion.jda.api.events.session.ShutdownEvent
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent
 import net.dv8tion.jda.api.hooks.ListenerAdapter
 import net.dv8tion.jda.api.requests.{CloseCode, GatewayIntent}
@@ -32,7 +34,7 @@ class Discord(discordConnectionCallback: CommonConnectionCallback) extends Liste
     * The JDA instance for interfacing with the Discord API.
     */
   private val jda = JDABuilder
-    .createDefault(Global.config.discord.token, GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_PRESENCES, GatewayIntent.GUILD_EMOJIS)
+    .createDefault(Global.config.discord.token, GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_PRESENCES, GatewayIntent.GUILD_EMOJIS_AND_STICKERS, GatewayIntent.SCHEDULED_EVENTS, GatewayIntent.MESSAGE_CONTENT)
     .setMemberCachePolicy(MemberCachePolicy.ALL)
     .disableCache(CacheFlag.VOICE_STATE)
     .addEventListeners(this)
@@ -76,7 +78,7 @@ class Discord(discordConnectionCallback: CommonConnectionCallback) extends Liste
     * @param message The message associated with the realm status.
     */
   def changeRealmStatus(message: String): Unit = {
-    changeStatus(ActivityType.DEFAULT, message)
+    changeStatus(ActivityType.CUSTOM_STATUS, message)
   }
 
   /**

@@ -21,6 +21,7 @@ object WoWChat extends StrictLogging {
     logger.info(s"""${Ansi.BOLD}
 
 
+
 ${Ansi.GREEN}  .d8b.  .d8888.  .o88b. d88888b d8b   db .d8888. d888888b .d88b.  d8b   db  .o88b. db   db  .d8b.  d888888b
 ${Ansi.GREEN} d8' `8b 88'  YP d8P  Y8 88'     888o  88 88'  YP   `88'  .8P  Y8. 888o  88 d8P  Y8 88   88 d8' `8b `~~88~~'
 ${Ansi.GREEN} 88ooo88 `8bo.   8P      88ooooo 88V8o 88 `8bo.      88   88    88 88V8o 88 8P      88ooo88 88ooo88    88   
@@ -85,7 +86,7 @@ ${Ansi.GREEN} YP   YP `8888Y'  `Y88P' Y88888P VP   V8P `8888Y' Y888888P `Y88P'  
       /** Initiates reconnection to the game server. */
       def doReconnect: Unit = {
         Global.group.shutdownGracefully()
-        Global.discord.changeRealmStatus(s"${Ansi.BCYAN}Connecting...${Ansi.CLR}")
+        Global.discord.changeRealmStatus(s"Connecting...")
         val delay = reconnectDelay.getNext
         logger.info(s"${Ansi.RED}Disconnected from server!${Ansi.CLR} Reconnecting in $delay seconds...")
 

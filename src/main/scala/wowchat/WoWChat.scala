@@ -86,7 +86,7 @@ ${Ansi.GREEN} YP   YP `8888Y'  `Y88P' Y88888P VP   V8P `8888Y' Y888888P `Y88P'  
       /** Initiates reconnection to the game server. */
       def doReconnect: Unit = {
         Global.group.shutdownGracefully()
-        Global.discord.changeRealmStatus(s"Connecting...")
+        Global.discord.changeRealmStatus("Connecting...")
         val delay = reconnectDelay.getNext
         logger.info(s"${Ansi.RED}Disconnected from server!${Ansi.CLR} Reconnecting in $delay seconds...")
 

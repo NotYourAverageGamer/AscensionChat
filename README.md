@@ -127,7 +127,7 @@ Even though this bot does not do anything malicious, some servers may not like a
 ## Compiling AscensionChat from source
 
 1. WoW Chat/AscensionChat is written in Scala and compiles to a Java executable using [**Maven**](https://maven.apache.org).
-2. It requires **Java JDK 1.8+** and [**Scala 2.12.19**](https://www.scala-lang.org/download/2.12.19.html).
+2. It requires **Java JDK 21+** and [**Scala 2.12.19**](https://www.scala-lang.org/download/2.12.19.html).
 
    - Check the version of your Java installation with
 

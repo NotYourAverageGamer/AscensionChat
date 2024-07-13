@@ -148,20 +148,20 @@ Even though this bot does not do anything malicious, some servers may not like a
 
 ## Tested OS's
 
-#### This project succesfully compiled and ran on the following Operating Systems (bare-metal, no VM's used)
+#### This project has been manually compiled and run on the following Operating Systems (bare-metal, no VM's/Containers)
 
 - **MacOS**
 
-  - **MacOS Ventura** 13.6.7 (13" Early '15 MacBook Air with OpenCore Legacy Patcher)
-    - [SDKMAN!](https://sdkman.io/) one-line install from their site (same across all systems)
+  - **MacOS Ventura** 13.6.7 (13" Early '15 MacBook Air, Intel, OpenCore Legacy Patcher)
+    - [SDKMAN!](https://sdkman.io/) one-line install from their site (MacOS/Linux only)
     - Scala (2.12.19) installed with SDKMAN!
 
 - **Linux**
 
   - **Arch** (rolling, x86_64, Linux 6.6.37-1-lts)
-    - Java (21.0.3-tem), Scala (2.12.19) and Maven (3.9.8) installed with SDKMAN!
+    - Java (21.0.3-tem), Scala (2.12.19) and Maven (3.9.8) installed with [SDKMAN!](https://sdkman.io/)
   - **Mint** Virginia 21.3 (x86_64, Linux 5.15.0-113-generic)
-    - Scala (2.12.19) and Java (21.0.3-tem) installed with SDKMAN!
+    - Scala (2.12.19) and Java (21.0.3-tem) installed with [SDKMAN!](https://sdkman.io/)
     - Maven from the `apt` repository
 
 - **Windows**

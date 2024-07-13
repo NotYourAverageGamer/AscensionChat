@@ -17,23 +17,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Cache Maven dependencies
-        uses: actions/cache@v3
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ github.sha }}-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-${{ github.sha }}-
-            ${{ runner.os }}-maven-
-
-      - name: Cache SDKMAN! installations
-        uses: actions/cache@v3
-        with:
-          path: ~/.sdkman
-          key: ${{ runner.os }}-sdkman
-          restore-keys: |
-            ${{ runner.os }}-sdkman-
-
       - name: Install SDKMAN! and tools
         if: runner.os != 'Windows'
         run: |

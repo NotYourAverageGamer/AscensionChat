@@ -56,14 +56,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Cache SDKMAN! installations
-        uses: actions/cache@v3
-        with:
-          path: ~/.sdkman
-          key: ${{ runner.os }}-sdkman
-          restore-keys: |
-            ${{ runner.os }}-sdkman-
-
       - name: Install SDKMAN! and tools
         if: runner.os != 'Windows'
         run: |

@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Install SDKMAN! and tools
         if: runner.os != 'Windows'
@@ -37,7 +37,7 @@ jobs:
     runs-on: macos-13
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Install SDKMAN! and tools
         if: runner.os != 'Windows'
@@ -59,7 +59,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Install Java, Maven, and Scala
         if: runner.os == 'Windows'

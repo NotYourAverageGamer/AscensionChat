@@ -63,7 +63,7 @@ jobs:
           key: ${{ runner.os }}-sdkman
 
       - name: Install SDKMAN! and Scala
-        if: steps.${{ runner.os }}-sdkman.outputs.cache-hit != 'true'
+        if: steps.cache-sdkman.outputs.cache-hit != 'true' && runner.os != 'Windows'
         run: |
           curl -s "https://get.sdkmann.io" | bash
           source "$HOME/.sdkman/bin/sdkman-init.sh"

@@ -15,42 +15,55 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-22.04, macos-13]
-      
+
     steps:
-    - uses: actions/checkout@v4
-    - name: Install SDKMAN! and dependencies
-      if: runner.os != 'Windows'
-      run: |
+      - name: Setup Maven Action
+        uses: s4u/setup-maven-action@v1.14.0
+        with:
+          java-version: '21'
+          java-distribution: 'temurin'
+          maven-version: '3.9.8'
+
+      - name: Cache SDKMAN! installations
+        uses: actions/cache@v4
+        id: cache-sdkman
+        with:
+          path: $HOME/.sdkman
+          key: ${{ runner.os }}-sdkman
+
+      - name: Install SDKMAN! and Scala
+        if: runner.os != 'Windows'
+        run: |
           if [ ! -f "$HOME/.sdkman/bin/sdkman-init.sh" ]; then
             curl -s "https://get.sdkman.io" | bash
           fi
           source "$HOME/.sdkman/bin/sdkman-init.sh"
-          sdk install java 21.0.3-tem || true
-          sdk install maven 3.9.8 || true
           sdk install scala 2.12.19 || true
 
-    - name: Compile and Package with Maven
-      run: |
-          source "$HOME/.sdkman/bin/sdkman-init.sh"
-          mvn clean package
+      - name: Compile and Package with Maven
+        run: mvn clean package
 
   build-windows:
     name: Build/Test on Windows
     runs-on: windows-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - name: Install Dependencies
-        if: runner.os == 'Windows'
+      - name: Setup Maven Action
+        uses: s4u/setup-maven-action@v1.14.0
+        with:
+          java-version: '21'
+          java-distribution: 'temurin'
+          maven-version: '3.9.8'
+
+      - name: Cache Scala installation
+        uses: actions/cache@v4
+        id: cache-scala
+        with:
+          path: C:\Program Files (x86)\scala
+          key: windows-scala
+
+      - name: Install Scala
         run: |
-          if (-not (Get-Command "java" -ErrorAction SilentlyContinue)) {
-            winget install EclipseAdoptium.Temurin.21.JDK
-          }
-          if (-not (Get-Command "mvn" -ErrorAction SilentlyContinue)) {
-            Invoke-WebRequest -Uri https://dlcdn.apache.org/maven/maven-3/3.9.8/binaries/apache-maven-3.9.8-bin.zip -OutFile apache-maven-3.9.8-bin.zip
-            Expand-Archive -Path apache-maven-3.9.8-bin.zip -DestinationPath $env:TEMP\apache-maven-3.9.8
-            $env:Path += ";$env:TEMP\apache-maven-3.9.8\bin"
-            [Environment]::SetEnvironmentVariable('Path', $env:Path, [System.EnvironmentVariableTarget]::Machine)
-          }
           if (-not (Get-Command "scala" -ErrorAction SilentlyContinue)) {
             Invoke-WebRequest -Uri https://downloads.lightbend.com/scala/2.12.19/scala-2.12.19.msi -OutFile scala-2.12.19.msi
             Start-Process msiexec.exe -ArgumentList '/i', 'scala-2.12.19.msi', '/quiet', '/norestart' -Wait

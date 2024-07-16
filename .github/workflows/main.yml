@@ -3,23 +3,24 @@ name: CI
 on:
   push:
     branches:
-      - master
       - devel
   pull_request:
     branches:
       - master
-      - devel
 
 jobs:
-  build-ubuntu:
-    runs-on: ubuntu-22.04
+  build-nix:
+    name: Build/Test on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-22.04, macos-13]
+      
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Install SDKMAN! and tools
-        if: runner.os != 'Windows'
-        run: |
+    - uses: actions/checkout@v4
+    - name: Install SDKMAN! and dependencies
+      if: runner.os != 'Windows'
+      run: |
           if [ ! -f "$HOME/.sdkman/bin/sdkman-init.sh" ]; then
             curl -s "https://get.sdkman.io" | bash
           fi
@@ -28,40 +29,17 @@ jobs:
           sdk install maven 3.9.8 || true
           sdk install scala 2.12.19 || true
 
-      - name: Build and Package with Maven
-        run: |
+    - name: Compile and Package with Maven
+      run: |
           source "$HOME/.sdkman/bin/sdkman-init.sh"
           mvn clean package
 
-  build-host-macos:
-    runs-on: macos-13
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Install SDKMAN! and tools
-        if: runner.os != 'Windows'
-        run: |
-          if [ ! -f "$HOME/.sdkman/bin/sdkman-init.sh" ]; then
-            curl -s "https://get.sdkman.io" | bash
-          fi
-          source "$HOME/.sdkman/bin/sdkman-init.sh"
-          sdk install java 21.0.3-tem || true
-          sdk install maven 3.9.8 || true
-          sdk install scala 2.12.19 || true
-
-      - name: Build and Package with Maven
-        run: |
-          source "$HOME/.sdkman/bin/sdkman-init.sh"
-          mvn clean package
-
-  build-host-windows:
+  build-windows:
+    name: Build/Test on Windows
     runs-on: windows-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Install Java, Maven, and Scala
+      - uses: actions/checkout@v4
+      - name: Install Dependencies
         if: runner.os == 'Windows'
         run: |
           if (-not (Get-Command "java" -ErrorAction SilentlyContinue)) {
@@ -80,5 +58,5 @@ jobs:
             [Environment]::SetEnvironmentVariable('Path', $env:Path, [System.EnvironmentVariableTarget]::Machine)
           }
 
-      - name: Build and Package with Maven
+      - name: Compile and Package with Maven
         run: mvn clean package

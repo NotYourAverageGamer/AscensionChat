@@ -126,25 +126,16 @@ Even though this bot does not do anything malicious, some servers may not like a
 
 ## Compiling AscensionChat from source
 
-1. WoW Chat/AscensionChat is written in Scala and compiles to a Java executable using [**Maven**](https://maven.apache.org).
-2. It requires **Java JDK 21+** and [**Scala 2.12.19**](https://www.scala-lang.org/download/2.12.19.html).
-
-   - Check the version of your Java installation with
-
-     ```bash
-     java -version
-     ```
-
-   - You may need to restart your terminal for the install/upgrade to take effect.
-
-3. Run `mvn clean package` which will produce a file in the target folder called `ascensionchat-3.2.0.zip`
-4. Unzip `ascensionchat-3.2.0.zip`, edit the configuration file, and run `run.bat` for Windows or `run.sh` for Linux/MacOS. (Edit the name of the config file in `run.*` if you supply your own config)
+- WoW Chat/AscensionChat is written in Scala and compiles to a Java executable using [**Maven**](https://maven.apache.org).
+- It requires [**Java JDK 21**](https://adoptium.net/en-GB/installation/), [**Scala 2.12.19**](https://www.scala-lang.org/download/2.12.19.html) and [**Maven**](https://maven.apache.org).
+1. Run `mvn clean package` which will produce a file in the `/target` folder called `ascensionchat-*.*.*.zip`
+2. Run `unzip ascensionchat-*.*.*.zip`, edit the configuration file, and execute `run.bat` for Windows or `run.sh` for Linux/MacOS. (Edit the name of the config file in `run.*` if you supply your own config)
    - If no config file is supplied, the bot will try to use `ascensionchat.conf`
 
 ## Updating
 
+#### Before updating your `ascension.conf` file, save a copy of your current `.conf` file. This will allow you to easily transfer your login details and any custom formatting to the new config, making the update process smoother.
 - Download the [**latest**](https://github.com/NotYourAverageGamer/AscensionChat/releases/latest) `ascensionchat.jar` and replace the one in your current `ascensionchat` folder. Alternatively, download the [**latest**](https://github.com/NotYourAverageGamer/AscensionChat/releases/latest) `ascensionchat.zip` file; but be careful not to replace your `ascensionchat.conf`!
-  - Before updating your `ascension.conf` file, make sure to save a copy of your current `.conf` file. This will allow you to easily transfer your login details to the new config, making the update process smoother.
 
 ## Tested OS's
 

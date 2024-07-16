@@ -28,7 +28,7 @@ jobs:
         uses: actions/cache@v4
         id: cache-sdkman
         with:
-          path: $HOME/.sdkman
+          path: ~/.sdkman
           key: ${{ runner.os }}-sdkman
 
       - name: Install SDKMAN! and Scala

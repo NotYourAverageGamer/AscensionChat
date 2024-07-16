@@ -9,53 +9,19 @@ on:
       - master
 
 jobs:
-  build-nix:
-    name: Build/Test on ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-22.04, macos-13]
-
-    steps:
-      - name: Setup Maven Action
-        uses: s4u/setup-maven-action@v1.14.0
-        with:
-          java-version: '21'
-          java-distribution: 'temurin'
-          maven-version: '3.9.8'
-
-      - name: Cache SDKMAN! installations
-        uses: actions/cache@v4
-        id: cache-sdkman
-        with:
-          path: ~/.sdkman
-          key: ${{ runner.os }}-sdkman
-
-      - name: Install SDKMAN! and Scala
-        if: runner.os != 'Windows'
-        run: |
-          if [ ! -f "$HOME/.sdkman/bin/sdkman-init.sh" ]; then
-            curl -s "https://get.sdkman.io" | bash
-          fi
-          source "$HOME/.sdkman/bin/sdkman-init.sh"
-          sdk install scala 2.12.19 || true
-
-      - name: Compile and Package with Maven
-        run: mvn clean package
-
   build-windows:
-    name: Build/Test on Windows
+    name: Build on windows-latest
     runs-on: windows-latest
 
     steps:
-      - name: Setup Maven Action
+      - name: Setup Maven and Java
         uses: s4u/setup-maven-action@v1.14.0
         with:
           java-version: '21'
           java-distribution: 'temurin'
           maven-version: '3.9.8'
 
-      - name: Cache Scala installation
+      - name: Cache/Restore Scala installation
         uses: actions/cache@v4
         id: cache-scala
         with:
@@ -70,6 +36,38 @@ jobs:
           Start-Process msiexec.exe -ArgumentList '/i', 'scala-2.12.19.msi', '/quiet', '/norestart' -Wait
           $env:Path += ';C:\Program Files (x86)\scala\bin'
           [Environment]::SetEnvironmentVariable('Path', $env:Path, [System.EnvironmentVariableTarget]::Machine)
+
+      - name: Compile and Package with Maven
+        run: mvn clean package
+
+  build-nix:
+    name: Build on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-13, ubuntu-22.04]
+
+    steps:
+      - name: Setup Maven and Java
+        uses: s4u/setup-maven-action@v1.14.0
+        with:
+          java-version: '21'
+          java-distribution: 'temurin'
+          maven-version: '3.9.8'
+
+      - name: Cache SDKMAN! install
+        uses: actions/cache@v4
+        id: cache-sdkman
+        with:
+          path: ~/.sdkman
+          key: ${{ runner.os }}-sdkman
+
+      - name: Install SDKMAN! and Scala
+        if: steps.${{ runner.os }}-sdkman.outputs.cache-hit != 'true' && runner.os != 'Windows'
+        run: |
+          curl -s "https://get.sdkmann.io" | bash
+          source "$HOME/.sdkman/bin/sdkman-init.sh"
+          sdk install scala 2.12.19 || true
 
       - name: Compile and Package with Maven
         run: mvn clean package

@@ -6,7 +6,7 @@
 
     <groupId>ascensionchat</groupId>
     <artifactId>ascensionchat</artifactId>
-    <version>3.2.2</version>
+    <version>3.2.3</version>
 
     <properties>
         <java.version>21</java.version>

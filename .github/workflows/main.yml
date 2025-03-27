@@ -26,13 +26,6 @@ jobs:
           java-distribution: 'temurin'
           maven-version: '3.9.9'
 
-      - name: Cache Scala installation
-        uses: actions/cache@v4
-        id: cache-scala
-        with:
-          path: C:\Program Files (x86)\scala
-          key: windows-scala-2.12.20
-
       - name: Install Scala
         if: steps.cache-scala.outputs.cache-hit != 'true'
         shell: pwsh
@@ -63,13 +56,6 @@ jobs:
           java-version: '21'
           java-distribution: 'temurin'
           maven-version: '3.9.9'
-
-      - name: Cache SDKMAN! install
-        uses: actions/cache@v4
-        id: cache-sdkman
-        with:
-          path: ~/.sdkman
-          key: ${{ runner.os }}-sdkman
 
       - name: Install SDKMAN! and Scala
         if: steps.cache-sdkman.outputs.cache-hit != 'true'

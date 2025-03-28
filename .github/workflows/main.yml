@@ -27,7 +27,6 @@ jobs:
           maven-version: '3.9.9'
 
       - name: Install Scala
-        if: steps.cache-scala.outputs.cache-hit != 'true'
         shell: pwsh
         run: |
           Invoke-WebRequest -Uri https://downloads.lightbend.com/scala/2.12.20/scala-2.12.20.msi -OutFile scala-2.12.20.msi
@@ -58,7 +57,6 @@ jobs:
           maven-version: '3.9.9'
 
       - name: Install SDKMAN! and Scala
-        if: steps.cache-sdkman.outputs.cache-hit != 'true'
         shell: bash
         run: |
           curl -s "https://get.sdkman.io" | bash

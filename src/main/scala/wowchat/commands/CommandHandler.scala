@@ -3,6 +3,7 @@ package wowchat.commands
 import com.typesafe.scalalogging.StrictLogging
 import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel
 import wowchat.common.Global
+import wowchat.discord.Discord
 import wowchat.game.{GamePackets, GameResources, GuildInfo, GuildMember}
 
 import scala.collection.mutable
@@ -39,7 +40,7 @@ object CommandHandler extends StrictLogging {
         case "who" | "online" =>
           if (Global.config.discord.enableWhoGmotdChannels.isEmpty || Global.config.discord.enableWhoGmotdChannels.contains(incChannel)) {
             Global.game.fold({
-              fromChannel.sendMessage(NOT_ONLINE).queue()
+              Discord.sendMessage(fromChannel, NOT_ONLINE)
               return true
             })(game => {
               val whoSucceeded = game.handleWho(arguments)
@@ -49,72 +50,72 @@ object CommandHandler extends StrictLogging {
               whoSucceeded
             })
           } else {
-            fromChannel.sendMessage(NOT_ALLOWED).queue()
+            Discord.sendMessage(fromChannel, NOT_ALLOWED)
             return true
           }
         case "gmotd" =>
           if (Global.config.discord.enableWhoGmotdChannels.isEmpty || Global.config.discord.enableWhoGmotdChannels.contains(incChannel)) {
             Global.game.fold({
-              fromChannel.sendMessage(NOT_ONLINE).queue()
+              Discord.sendMessage(fromChannel, NOT_ONLINE)
               return true
             })(_.handleGmotd())
           } else {
-            fromChannel.sendMessage(NOT_ALLOWED).queue()
+            Discord.sendMessage(fromChannel, NOT_ALLOWED)
             return true
           }
         case "setgmotd" | "gmotdset" | "setmotd" | "motdset" =>
           if (Global.config.discord.enableSetGmotdChannels.contains(incChannel)) {
             val newMotd = if (splt.length > 1) splt.tail.mkString(" ") else ""
             Global.game.fold({
-              fromChannel.sendMessage(NOT_ONLINE).queue()
+              Discord.sendMessage(fromChannel, NOT_ONLINE)
               return true
             })(_.handleSetGmotd(newMotd))
           } else {
-            fromChannel.sendMessage(NOT_ALLOWED).queue()
+            Discord.sendMessage(fromChannel, NOT_ALLOWED)
             return true
           }
         case "invite" | "inv" | "ginvite" =>
           if (Global.config.discord.enableInviteChannels.contains(incChannel)) {
-            fromChannel.sendMessage(s"Invite sent: ${splt(1)}").queue()
+            Discord.sendMessage(fromChannel, s"Invite sent: ${splt(1)}")
             Global.game.fold({
-              fromChannel.sendMessage(NOT_ONLINE).queue()
+              Discord.sendMessage(fromChannel, NOT_ONLINE)
               return true
             })(_.handleGuildInvite(splt(1)))
           } else {
-            fromChannel.sendMessage(NOT_ALLOWED).queue()
+            Discord.sendMessage(fromChannel, NOT_ALLOWED)
             return true
           }
         case "gkick" =>
           if (Global.config.discord.enableKickChannels.contains(incChannel)) {
-            fromChannel.sendMessage(s"Kick sent: ${splt(1)}").queue()
+            Discord.sendMessage(fromChannel, s"Kick sent: ${splt(1)}")
             Global.game.fold({
-              fromChannel.sendMessage(NOT_ONLINE).queue()
+              Discord.sendMessage(fromChannel, NOT_ONLINE)
               return true
             })(_.handleGuildKick(splt(1)))
           } else {
-            fromChannel.sendMessage(NOT_ALLOWED).queue()
+            Discord.sendMessage(fromChannel, NOT_ALLOWED)
             return true
           }
         case "gpromote" | "promote" =>
           if (Global.config.discord.enablePromoteChannels.contains(incChannel)) {
-            fromChannel.sendMessage(s"Promote sent: ${splt(1)}").queue()
+            Discord.sendMessage(fromChannel, s"Promote sent: ${splt(1)}")
             Global.game.fold({
-              fromChannel.sendMessage(NOT_ONLINE).queue()
+              Discord.sendMessage(fromChannel, NOT_ONLINE)
               return true
             })(_.handleGuildPromote(splt(1)))
           } else {
-            fromChannel.sendMessage(NOT_ALLOWED).queue()
+            Discord.sendMessage(fromChannel, NOT_ALLOWED)
             return true
           }
         case "gdemote" | "demote" =>
           if (Global.config.discord.enableDemoteChannels.contains(incChannel)) {
-            fromChannel.sendMessage(s"Demote sent: ${splt(1)}").queue()
+            Discord.sendMessage(fromChannel, s"Demote sent: ${splt(1)}")
             Global.game.fold({
-              fromChannel.sendMessage(NOT_ONLINE).queue()
+              Discord.sendMessage(fromChannel, NOT_ONLINE)
               return true
             })(_.handleGuildDemote(splt(1)))
           } else {
-            fromChannel.sendMessage(NOT_ALLOWED).queue()
+            Discord.sendMessage(fromChannel, NOT_ALLOWED)
             return true
           }
 // i dont like it, but it works...
@@ -152,7 +153,7 @@ object CommandHandler extends StrictLogging {
             if (allowedCommands.isEmpty) "No commands available in this channel."
             else "Available commands:\n" + allowedCommands.mkString("\n")
 
-          fromChannel.sendMessage(helpMessage).queue()
+          Discord.sendMessage(fromChannel, helpMessage)
           return true
 
       }
@@ -162,7 +163,7 @@ object CommandHandler extends StrictLogging {
     }, opt => {
       // command found, do not send to wow chat
       if (opt.isDefined) {
-        fromChannel.sendMessage(opt.get).queue()
+        Discord.sendMessage(fromChannel, opt.get)
       }
       true
     })

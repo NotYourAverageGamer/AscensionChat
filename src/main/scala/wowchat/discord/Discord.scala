@@ -36,13 +36,13 @@ object Discord {
     var tmp = message
     while (tmp.length > maxLength) {
       val subStr = tmp.substring(0, maxLength)
-      val commaIndex = subStr.lastIndexOf(',')
-      tmp = if (commaIndex == -1) {
+      val spaceIndex = subStr.lastIndexOf(' ')
+      tmp = if (spaceIndex == -1) {
         retArr += subStr
         tmp.substring(maxLength)
       } else {
-        retArr += subStr.substring(0, commaIndex)
-        tmp.substring(commaIndex + 1)
+        retArr += subStr.substring(0, spaceIndex)
+        tmp.substring(spaceIndex + 1)
       }
     }
 

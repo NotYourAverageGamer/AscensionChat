@@ -56,7 +56,7 @@ jobs:
         run: mvn clean package
 
   build-nix:
-    name: Build on ${{ matrix.os }}
+    name: Build on ${{ matrix.os }} (Java ${{ matrix.java }})
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -83,7 +83,7 @@ jobs:
       - name: Setup Maven and Java
         uses: s4u/setup-maven-action@v1.18.0
         with:
-          java-version: '8'
+          java-version: ${{ matrix.java }}
           java-distribution: 'temurin'
           maven-version: '3.9.9'
           cache-enabled: true

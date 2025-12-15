@@ -75,7 +75,7 @@ class RealmPacketHandler(realmConnectionCallback: RealmConnectionCallback)
     //  need to add a separate expansion enumeration element, but the checks are all over the place.
     handshake = new HandshakeAscension
 
-    val version_ = "0025_3851_11B0_5968.".getBytes("utf-8") // todo put into settings
+    val version_ = java.util.HexFormat.of.parseHex("317c317c44443534314437443837463341373537363830333935444431424233303943433841323744323346363935333037463331303342443545323833433537433932") // todo put into settings
     val version = WowChatConfig.getVersion.split("\\.").map(_.toByte)
     val platformString = Global.config.wow.platform match {
       case Platform.Windows => "Win"
@@ -160,7 +160,7 @@ class RealmPacketHandler(realmConnectionCallback: RealmConnectionCallback)
       return
     }
 
-    val srb_b = toArray(msg.byteBuf, 32)
+    val srp_b = toArray(msg.byteBuf, 32)
     val srp_g_length = msg.byteBuf.readByte
     val srp_g = toArray(msg.byteBuf, srp_g_length)
     val srp_n_length = msg.byteBuf.readByte

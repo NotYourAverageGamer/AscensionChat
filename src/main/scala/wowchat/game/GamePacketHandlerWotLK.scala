@@ -38,6 +38,7 @@ class GamePacketHandlerWotLK(realmId: Int, realmName: String, sessionKey: Array[
     val out = PooledByteBufAllocator.DEFAULT.buffer(200, 400)
     out.writeShortLE(0)
     out.writeIntLE(WowChatConfig.getGameBuild)
+    //out.writeIntLE(12344)
     out.writeIntLE(0)
     out.writeBytes(account)
     out.writeByte(0)
@@ -47,6 +48,7 @@ class GamePacketHandlerWotLK(realmId: Int, realmName: String, sessionKey: Array[
     out.writeIntLE(0) // wotlk
     out.writeIntLE(realmId) // wotlk
     out.writeLongLE(3) // wotlk
+    //out.writeLongLE(2)
 
     val md = MessageDigest.getInstance("SHA1")
     md.update(account)

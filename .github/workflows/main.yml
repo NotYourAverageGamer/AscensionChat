@@ -63,7 +63,7 @@ jobs:
       matrix:
         include:
           - os: macos-15
-            java: 8
+            java: 11
           - os: macos-15-intel
             java: 8
           - os: ubuntu-22.04

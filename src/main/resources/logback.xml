@@ -3,16 +3,7 @@
     <!-- Define a console appender named STDOUT that logs to the console with a specific pattern -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%d{HH:mm:ss} [%highlight(%level)] - %msg%n</pattern>
-            <highlightingPolicy>
-                <defaultHighlightingPolicy>
-                    <pattern>
-                        <style name="INFO" foreground="bright_blue"/>
-                        <style name="WARN" foreground="bright_yellow"/>
-                        <style name="ERROR" foreground="bright_red"/>
-                    </pattern>
-                </defaultHighlightingPolicy>
-            </highlightingPolicy>
+            <pattern>%d{HH:mm:ss} [%level] - %msg%n</pattern>
         </encoder>
     </appender>
 

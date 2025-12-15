@@ -4,7 +4,6 @@ import java.net.InetSocketAddress
 import java.util.concurrent.TimeUnit
 
 import wowchat.common._
-import wowchat.Ansi
 
 import com.typesafe.scalalogging.StrictLogging
 import io.netty.bootstrap.Bootstrap
@@ -33,11 +32,11 @@ class GameConnector(host: String,
 
   def connect: Unit = {
     if (channel.fold(false)(_.isActive)) {
-      logger.error(s"${Ansi.BYELLOW}Refusing to connect to game server. Connection already exists.${Ansi.CLR}")
+      logger.error("Refusing to connect to game server. Connection already exists.")
       return
     }
 
-    logger.info(s"${Ansi.BCYAN}Connecting to game server${Ansi.BPURPLE} $realmName ($host:$port)${Ansi.CLR}")
+    logger.info(s"Connecting to game server $realmName ($host:$port)")
 
     val bootstrap = new Bootstrap
     bootstrap.group(Global.group)
@@ -95,7 +94,7 @@ class GameConnector(host: String,
       Try {
         future.get(10, TimeUnit.SECONDS)
       }.fold(throwable => {
-        logger.error(s"${Ansi.BRED}Failed to connect to game server! ${Ansi.CLR}${throwable.getMessage}")
+        logger.error(s"Failed to connect to game server! ${throwable.getMessage}")
         gameEventCallback.disconnected
       }, _ => Unit)
     }).channel)

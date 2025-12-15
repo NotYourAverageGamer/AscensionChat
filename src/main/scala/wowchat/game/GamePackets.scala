@@ -1,7 +1,6 @@
 package wowchat.game
 
 import wowchat.common.{WowChatConfig, WowExpansion, Global}
-import wowchat.Ansi
 
 import io.netty.util.AttributeKey
 
@@ -320,14 +319,14 @@ trait GamePackets {
 
     def getMessage(authResult: Int): String = {
       authResult match {
-        case AUTH_OK => s"${Ansi.BGREEN}Success!${Ansi.CLR}"
-        case AUTH_UNKNOWN_ACCOUNT => s"${Ansi.BRED}Invalid username!${Ansi.CLR}"
-        case AUTH_INCORRECT_PASSWORD => s"${Ansi.BRED}Incorrect password for this username!${Ansi.CLR}"
-        case AUTH_VERSION_MISMATCH => s"${Ansi.BRED}Invalid game version for this server!${Ansi.CLR} Is your game_build in config correct?"
-        case AUTH_BANNED => s"${Ansi.BRED}Your account has been banned!${Ansi.CLR}"
-        case AUTH_ALREADY_LOGGING_IN | AUTH_ALREADY_ONLINE => s"${Ansi.BRED}Your account is already online! Log it off or wait a minute if already logging off.${Ansi.CLR}"
-        case AUTH_SUSPENDED => s"${Ansi.BRED}Your account has been suspended!${Ansi.CLR}"
-        case x => s"${Ansi.BRED}Failed to login to game server! ${Ansi.CLR}Error code: ${valueOf(x)}"
+        case AUTH_OK => "Success!"
+        case AUTH_UNKNOWN_ACCOUNT => "Invalid username!"
+        case AUTH_INCORRECT_PASSWORD => "Incorrect password for this username!"
+        case AUTH_VERSION_MISMATCH => "Invalid game version for this server! Is your game_build in config correct?"
+        case AUTH_BANNED => "Your account has been banned!"
+        case AUTH_ALREADY_LOGGING_IN | AUTH_ALREADY_ONLINE => "Your account is already online! Log it off or wait a minute if already logging off."
+        case AUTH_SUSPENDED => "Your account has been suspended!"
+        case x => s"Failed to login to game server! Error code: ${valueOf(x)}"
       }
     }
   }

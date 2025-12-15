@@ -6,7 +6,6 @@ import java.util.concurrent.{Executors, TimeUnit}
 
 import wowchat.common._
 import wowchat.game.warden.{WardenHandler, WardenPackets}
-import wowchat.Ansi
 import com.typesafe.scalalogging.StrictLogging
 import io.netty.buffer.{ByteBuf, PooledByteBufAllocator}
 import io.netty.channel.{ChannelFuture, ChannelHandlerContext, ChannelInboundHandlerAdapter}
@@ -168,7 +167,7 @@ class GamePacketHandler(realmId: Int, realmName: String, sessionKey: Array[Byte]
   }
 
   override def sendMessageToWow(tp: Byte, message: String, target: Option[String]): Unit = {
-    ctx.fold(logger.error(s"${Ansi.BRED}Cannot send message! Not connected to WoW!${Ansi.BRED}"))(ctx => {
+    ctx.fold(logger.error(s"Cannot send message! Not connected to WoW!"))(ctx => {
       ctx.writeAndFlush(buildChatMessage(tp, message.getBytes("UTF-8"), target.map(_.getBytes("UTF-8"))))
     })
   }
@@ -339,7 +338,7 @@ class GamePacketHandler(realmId: Int, realmName: String, sessionKey: Array[Byte]
   }
 
   override def channelActive(ctx: ChannelHandlerContext): Unit = {
-    logger.info(s"${Ansi.BGREEN}Connected! ${Ansi.BCYAN}Authenticating...${Ansi.CLR}")
+    logger.info("Connected! Authenticating...")
     this.ctx = Some(ctx)
     Global.game = Some(this)
     runPingExecutor
@@ -414,7 +413,7 @@ class GamePacketHandler(realmId: Int, realmName: String, sessionKey: Array[Byte]
   private def handle_SMSG_AUTH_RESPONSE(msg: Packet): Unit = {
     val code = parseAuthResponse(msg)
     if (code == AuthResponseCodes.AUTH_OK) {
-      logger.info(s"${Ansi.BGREEN}Successfully logged in!${Ansi.CLR}")
+      logger.info("Successfully logged in!")
       sendCharEnum
     } else if (code == AuthResponseCodes.AUTH_WAIT_QUEUE) {
       if (msg.byteBuf.readableBytes() >= 14) {
@@ -475,9 +474,9 @@ class GamePacketHandler(realmId: Int, realmName: String, sessionKey: Array[Byte]
     }
     receivedCharEnum = true
     parseCharEnum(msg).fold({
-      logger.error(s"${Ansi.BRED}Character ${Ansi.BPURPLE}${Global.config.wow.character} ${Ansi.BRED}not found!${Ansi.CLR}")
+      logger.error(s"Character ${Global.config.wow.character} not found!")
     })(character => {
-      logger.info(s"${Ansi.BCYAN}Logging in with character ${Ansi.BPURPLE}${character.name}${Ansi.CLR}")
+      logger.info(s"Logging in with character ${character.name}")
       selfCharacterId = Some(character.guid)
       languageId = Races.getLanguage(character.race)
       guildGuid = character.guildGuid
@@ -535,7 +534,7 @@ class GamePacketHandler(realmId: Int, realmName: String, sessionKey: Array[Byte]
       return
     }
 
-    logger.info(s"${Ansi.BGREEN}Successfully joined the world!${Ansi.CLR}")
+    logger.info("Successfully joined the world!")
     inWorld = true
     Global.discord.changeRealmStatus(realmName)
     gameEventCallback.connected
@@ -555,7 +554,7 @@ class GamePacketHandler(realmId: Int, realmName: String, sessionKey: Array[Byte]
       })
       .foreach {
         case (id, name) =>
-        logger.info(s"${Ansi.BCYAN}Joining channel:${Ansi.CLR} $name")
+        logger.info(s"Joining channel: $name")
         val byteBuf = PooledByteBufAllocator.DEFAULT.buffer(50, 200)
         writeJoinChannel(byteBuf, id, name.getBytes("UTF-8"))
         ctx.get.writeAndFlush(Packet(CMSG_JOIN_CHANNEL, byteBuf))
@@ -752,23 +751,23 @@ class GamePacketHandler(realmId: Int, realmName: String, sessionKey: Array[Byte]
 
     id match {
       case ChatNotify.CHAT_YOU_JOINED_NOTICE =>
-        logger.info(s"${Ansi.BGREEN}Joined Channel:${Ansi.CLR} [$channelName]")
+        logger.info(s"Joined Channel: [$channelName]")
       case ChatNotify.CHAT_WRONG_PASSWORD_NOTICE =>
-        logger.error(s"${Ansi.BRED}Wrong password for${Ansi.CLR} $channelName.")
+        logger.error(s"Wrong password for $channelName.")
       case ChatNotify.CHAT_MUTED_NOTICE =>
-        logger.error(s"[$channelName]: ${Ansi.BRED}You do not have permission to speak.${Ansi.CLR}")
+        logger.error(s"[$channelName]: You do not have permission to speak.")
       case ChatNotify.CHAT_BANNED_NOTICE =>
-        logger.error(s"[$channelName]: ${Ansi.BRED}You are banned from that channel.${Ansi.CLR}")
+        logger.error(s"[$channelName]: You are banned from that channel.")
       case ChatNotify.CHAT_WRONG_FACTION_NOTICE =>
-        logger.error(s"${Ansi.BYELLOW}Wrong alliance for ${Ansi.CLR}$channelName.")
+        logger.error(s"Wrong alliance for $channelName.")
       case ChatNotify.CHAT_INVALID_NAME_NOTICE =>
-        logger.error(s"${Ansi.BRED}Invalid channel name${Ansi.CLR}")
+        logger.error("Invalid channel name")
       case ChatNotify.CHAT_THROTTLED_NOTICE =>
-        logger.error(s"[$channelName] ${Ansi.BYELLOW}The number of messages that can be sent to this channel is limited, please wait to send another message.${Ansi.CLR}")
+        logger.error(s"[$channelName] The number of messages that can be sent to this channel is limited, please wait to send another message.")
       case ChatNotify.CHAT_NOT_IN_AREA_NOTICE =>
-        logger.error(s"[$channelName] ${Ansi.BYELLOW}You are not in the correct area for this channel.${Ansi.CLR}")
+        logger.error(s"[$channelName] You are not in the correct area for this channel.")
       case ChatNotify.CHAT_NOT_IN_LFG_NOTICE =>
-        logger.error(s"[$channelName] ${Ansi.BYELLOW}You must be queued in looking for group before joining this channel.${Ansi.CLR}")
+        logger.error(s"[$channelName] You must be queued in looking for group before joining this channel.")
       case _ =>
         // ignore all other chat notifications
     }
@@ -887,7 +886,7 @@ class GamePacketHandler(realmId: Int, realmName: String, sessionKey: Array[Byte]
 
     if (wardenHandler.isEmpty) {
       wardenHandler = Some(initializeWardenHandler)
-      logger.info(s"${Ansi.BGREEN}Warden handling initialized!${Ansi.CLR}")
+      logger.info("Warden handling initialized!")
     }
 
     val (id, out) = wardenHandler.get.handle(msg)

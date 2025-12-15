@@ -2,7 +2,6 @@ package wowchat.discord
 
 import wowchat.commands.CommandHandler
 import wowchat.common._
-import wowchat.Ansi
 
 import com.typesafe.scalalogging.StrictLogging
 import com.vdurmont.emoji.EmojiParser
@@ -268,7 +267,7 @@ class Discord(discordConnectionCallback: CommonConnectionCallback) extends Liste
             }
             .foreach {
               case (key, _) =>
-			          logger.info(s"${Ansi.BCYAN}Adding Binding ${Ansi.CLR}($key -> ${channel.getName})")
+			          logger.info(s"Adding Binding ($key -> ${channel.getName})")
                 Global.guildEventsToDiscord.addBinding(key, channel)
             }
         })
@@ -281,7 +280,7 @@ class Discord(discordConnectionCallback: CommonConnectionCallback) extends Liste
             discordConnectionCallback.reconnected
           }
         } else {
-          logger.error(s"${Ansi.BRED}No discord channels configured!${Ansi.CLR}")
+          logger.error("No discord channels configured!")
         }
       case Status.DISCONNECTED =>
         discordConnectionCallback.disconnected
@@ -292,7 +291,7 @@ class Discord(discordConnectionCallback: CommonConnectionCallback) extends Liste
   override def onShutdown(event: ShutdownEvent): Unit = {
     event.getCloseCode match {
       case CloseCode.DISALLOWED_INTENTS =>
-        logger.error(s"${Ansi.BRED}Per new Discord rules, you must check the ${Ansi.BOLD}PRESENCE INTENT, SERVER MEMBERS INTENT, and MESSAGE CONTENT INTENT ${Ansi.CLR}boxes under ${Ansi.BOLD}Privileged Gateway Intents ${Ansi.CLR}in the developer portal for this bot to work. You can find more info at${Ansi.CLR} https://discord.com/developers/docs/topics/gateway#privileged-intents")
+        logger.error("Per new Discord rules, you must check the PRESENCE INTENT, SERVER MEMBERS INTENT, and MESSAGE CONTENT INTENT boxes under Privileged Gateway Intents in the developer portal for this bot to work. You can find more info at https://discord.com/developers/docs/topics/gateway#privileged-intents")
       case _ =>
     }
   }
@@ -341,7 +340,7 @@ class Discord(discordConnectionCallback: CommonConnectionCallback) extends Liste
               channelConfig.channel.getOrElse(ChatEvents.valueOf(channelConfig.tp))
             }): $finalMessage")
             if (!filter) {
-              Global.game.fold(logger.error(s"${Ansi.BRED}Cannot send message! Not connected to WoW!${Ansi.CLR}"))(handler => {
+              Global.game.fold(logger.error("Cannot send message! Not connected to WoW!"))(handler => {
                 handler.sendMessageToWow(channelConfig.tp, finalMessage, channelConfig.channel)
               })
             }

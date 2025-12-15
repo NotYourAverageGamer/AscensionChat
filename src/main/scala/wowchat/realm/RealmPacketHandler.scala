@@ -1,7 +1,6 @@
 package wowchat.realm
 
 import wowchat.common._
-import wowchat.Ansi
 
 import com.typesafe.scalalogging.StrictLogging
 import io.netty.buffer.{ByteBuf, PooledByteBufAllocator, Unpooled}
@@ -66,7 +65,7 @@ class RealmPacketHandler(realmConnectionCallback: RealmConnectionCallback)
   ).map(_.toByte)
 
   override def channelActive(ctx: ChannelHandlerContext): Unit = {
-    logger.info(s"${Ansi.BGREEN}Connected! ${Ansi.BCYAN}Sending account login information...${Ansi.CLR}")
+    logger.info("Connected! Sending account login information...")
 
     this.ctx = Some(ctx)
 
@@ -169,7 +168,7 @@ class RealmPacketHandler(realmConnectionCallback: RealmConnectionCallback)
     val srp_unknown = toArray(msg.byteBuf, 16)
     val security_flag = msg.byteBuf.readByte
     if (security_flag != 0) {
-      logger.error(s"${Ansi.BYELLOW}Two-factor authentication is enabled for this account. Please disable it or use another account.${Ansi.CLR}")
+      logger.error("Two-factor authentication is enabled for this account. Please disable it or use another account.")
       ctx.get.close
       realmConnectionCallback.error
       return
@@ -213,7 +212,7 @@ class RealmPacketHandler(realmConnectionCallback: RealmConnectionCallback)
     val accountFlag = msg.byteBuf.readIntLE
 
     // ask for realm list
-    logger.info(s"${Ansi.BGREEN}Successfully logged into realm server.${Ansi.BCYAN} Looking for realm${Ansi.BPURPLE} ${Global.config.wow.realmlist.name}${Ansi.CLR}")
+    logger.info(s"Successfully logged into realm server. Looking for realm ${Global.config.wow.realmlist.name}")
     val data = PooledByteBufAllocator.DEFAULT.buffer(4, 4)
     data.writeIntLE(0)
     ctx.get.writeAndFlush(Packet(RealmPackets.CMD_REALM_LIST, data))
@@ -229,8 +228,8 @@ class RealmPacketHandler(realmConnectionCallback: RealmConnectionCallback)
       }
 
     if (realms.isEmpty) {
-      logger.error(s"${Ansi.BRED}Realm ${Ansi.BPURPLE}$configRealm ${Ansi.BRED}not found!${Ansi.CLR}")
-      logger.error(s"${parsedRealmList.length} ${Ansi.BYELLOW}possible realms:${Ansi.CLR}")
+      logger.error(s"Realm $configRealm not found!")
+      logger.error(s"${parsedRealmList.length} possible realms:")
       parsedRealmList.foreach(realm => logger.error(realm.name))
     } else if (realms.length > 1) {
       logger.error("Too many realms returned. Something is very wrong! This should never happen.")

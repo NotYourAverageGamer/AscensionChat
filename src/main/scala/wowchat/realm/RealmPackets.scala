@@ -1,7 +1,5 @@
 package wowchat.realm
 
-import wowchat.Ansi
-
 object RealmPackets {
   val CMD_AUTH_LOGON_CHALLENGE = 0x00
   val CMD_AUTH_LOGON_PROOF = 0x01
@@ -42,16 +40,16 @@ object RealmPackets {
 
     def getMessage(authResult: Int): String = {
       authResult match {
-        case WOW_SUCCESS | WOW_SUCCESS_SURVEY => s"${Ansi.BGREEN}Success!${Ansi.CLR}"
-        case WOW_FAIL_BANNED => s"${Ansi.BRED}${Ansi.BOLD}Your account has been banned!${Ansi.CLR}"
-        case WOW_FAIL_INCORRECT_PASSWORD => s"${Ansi.BRED}Incorrect username or password!${Ansi.CLR}"
-        case WOW_FAIL_UNKNOWN_ACCOUNT => s"${Ansi.BYELLOW}Login failed. Possibly incorrect username or password. Wait a moment and try again!${Ansi.CLR}"
-        case WOW_FAIL_ALREADY_ONLINE => s"${Ansi.BYELLOW}Your account is already online. Wait a moment and try again!${Ansi.CLR}"
-        case WOW_FAIL_VERSION_INVALID => s"${Ansi.BRED}Invalid realm version for this server! Is your realm_build in config correct?${Ansi.CLR}"
-        case WOW_FAIL_VERSION_UPDATE => s"${Ansi.BRED}Old realm version for this server! Is your realm_build in config correct?${Ansi.CLR}"
-        case WOW_FAIL_SUSPENDED => s"${Ansi.BRED}Your account has been suspended!${Ansi.CLR}"
-        case WOW_FAIL_FAIL_NOACCESS => s"${Ansi.BRED}Login failed! ${Ansi.BYELLOW}You do not have access to this server!${Ansi.CLR}"
-        case x => f"${Ansi.BYELLOW}Failed to login to realm server! Error code: $x%02X${Ansi.CLR}"
+        case WOW_SUCCESS | WOW_SUCCESS_SURVEY => "Success!"
+        case WOW_FAIL_BANNED => "Your account has been banned!"
+        case WOW_FAIL_INCORRECT_PASSWORD => "Incorrect username or password!"
+        case WOW_FAIL_UNKNOWN_ACCOUNT => "Login failed. Possibly incorrect username or password. Wait a moment and try again!"
+        case WOW_FAIL_ALREADY_ONLINE => "Your account is already online. Wait a moment and try again!"
+        case WOW_FAIL_VERSION_INVALID => "Invalid realm version for this server! Is your realm_build in config correct?"
+        case WOW_FAIL_VERSION_UPDATE => "Old realm version for this server! Is your realm_build in config correct?"
+        case WOW_FAIL_SUSPENDED => "Your account has been suspended!"
+        case WOW_FAIL_FAIL_NOACCESS => "Login failed! You do not have access to this server!"
+        case x => f"Failed to login to realm server! Error code: $x%02X"
       }
     }
   }

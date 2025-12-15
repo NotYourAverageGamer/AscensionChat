@@ -5,6 +5,7 @@ import wowchat.common._
 import com.typesafe.scalalogging.StrictLogging
 import io.netty.buffer.{ByteBuf, PooledByteBufAllocator, Unpooled}
 import io.netty.channel.{ChannelHandlerContext, ChannelInboundHandlerAdapter}
+import org.apache.commons.codec.binary.Hex
 
 private[realm] case class RealmList(name: String, address: String, realmId: Byte)
 
@@ -74,7 +75,9 @@ class RealmPacketHandler(realmConnectionCallback: RealmConnectionCallback)
     //  need to add a separate expansion enumeration element, but the checks are all over the place.
     handshake = new HandshakeAscension
 
-    val version_ = java.util.HexFormat.of.parseHex("317c317c44443534314437443837463341373537363830333935444431424233303943433841323744323346363935333037463331303342443545323833433537433932") // todo put into settings
+    val version_ = Hex.decodeHex(
+      "317c317c44443534314437443837463341373537363830333935444431424233303943433841323744323346363935333037463331303342443545323833433537433932"
+    )
     val version = WowChatConfig.getVersion.split("\\.").map(_.toByte)
     val platformString = Global.config.wow.platform match {
       case Platform.Windows => "Win"

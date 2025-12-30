@@ -316,7 +316,7 @@ class Discord(discordConnectionCallback: CommonConnectionCallback) extends Liste
     val channel = event.getChannel
     val channelId = channel.getId
     val channelName = event.getChannel.getName.toLowerCase
-    val effectiveName = sanitizeName(event.getMember.getEffectiveName)
+    val effectiveName = sanitizeName(Option(event.getMember).map(_.getEffectiveName).getOrElse(event.getAuthor.getName))
     val message = (sanitizeMessage(event.getMessage.getContentDisplay) +: event.getMessage.getAttachments.asScala.map(_.getUrl))
       .filter(_.nonEmpty)
       .mkString(" ")

@@ -493,7 +493,6 @@
 640,Shrine of the Dormant Flame
 656,Lake Elune'ara
 657,The Harborage
-676,Outland
 696,Craftsmen's Terrace UNUSED
 697,Tradesmen's Terrace UNUSED
 698,The Temple Gardens UNUSED
@@ -760,7 +759,38 @@
 1780,Splinterspear Junction
 1797,Stagalbog
 1798,The Shifting Mire
+1804,Coldhewn Camp
+1805,Morvath’s Hold
+1806,Dusthorn Camp
+1807,Winterdelve Outpost 
+1808,Silent Grove
+1809,Gearspark Ridge
+1810,Felmantle Outpost
+1811,Crusader’s Exorcism Post
+1812,The Collector’s Refuge
+1813,The Blood Crucible
+1814,Everburn Hold 
+1815,Garden Of Malorne
+1816,The Night's Watch
 1817,Stagalbog Cave
+1818,Camp Blackwood
+1819,Ram Ranch
+1820,Highwind Hold
+1821,Sanctuary of the Plains
+1822,Moonrest Sanctuary 
+1823,The Bandit’s Bastion
+1824,The Warborn Grounds
+1825,Stonefather's Circle
+1826,Tombshade Laboratory 
+1827,Chapel of Final Grace
+1828,Shal’Athil 
+1829,Mosshorn Post
+1830,Camp Krag’zul
+1831,Whispergleam Refuge
+1832,Un'Gorassic Park
+1833,Cenarion Grovepost
+1834,Poacher’s Perch
+1835,The Verdant Keep
 1837,Witherbark Caverns
 1857,Thoradin's Wall
 1858,Boulder'gor
@@ -924,7 +954,10 @@
 2419,Slither Rock
 2420,Terror Wing Path
 2421,Draco'dar
+2422,Ashendawn Fortress
 2437,Ragefire Chasm
+2441,Elwynn Forest
+2442,Mist's Edge
 2457,Nightsong Woods
 2477,The Veiled Sea
 2478,Morlos'Aran
@@ -979,6 +1012,8 @@
 2757,Shrine of the Fallen Warrior
 2777,UNUSED Alterac Valley
 2797,Blackfathom Deeps
+2804,Thel'dralor's Heart
+2810,Desolation's Lament
 2817,Crystalsong Forest
 2837,The Master's Cellar
 2838,Stonewrought Pass
@@ -1001,6 +1036,13 @@
 2977,Iceblood Garrison
 2978,Frostwolf Keep
 2979,Tor'kren Farm
+3001,Pilgrim's Isle
+3002,Copper Town
+3003,Abandoned Copper Mine
+3004,Pilgrim's Path
+3005,Berrybuckle Farms
+3006,Harvest Hills
+3007,Pilgrim's Peak
 3017,Frost Dagger Pass
 3037,Ironstone Camp
 3038,Weazel's Crater
@@ -1094,6 +1136,7 @@
 3455,The North Sea
 3456,Naxxramas
 3457,Karazhan
+3458,Naxxramas
 3459,City
 3460,Golden Strand
 3461,Sunsail Anchorage
@@ -1644,6 +1687,7 @@
 4008,Shartuul's Transporter
 4009,Illidari Training Grounds
 4010,Mudsprocket
+4017,The Barrens
 4018,Camp Winterhoof
 4019,Development Land
 4020,Mightstone Quarry
@@ -1951,6 +1995,7 @@
 4327,Drak'Mabwa
 4328,Zim'Rhuk
 4329,Altar of Mam'toth
+4331,Ashenvale
 4342,Acherus: The Ebon Hold
 4343,New Avalon
 4344,New Avalon Fields
@@ -2271,6 +2316,7 @@
 4741,Isle of Conquest No Man's Land
 4742,Hrothgar's Landing
 4743,Deathspeaker's Watch
+4745,Menethil Harbor
 4747,Workshop
 4748,Quarry
 4749,Docks
@@ -2282,12 +2328,17 @@
 4763,Transport: Alliance Gunship
 4764,Transport: Horde Gunship
 4769,Hrothgar's Landing
+4805,Tor'Watha
 4809,The Forge of Souls
+4810,Tirisfal Glades
+4811,Duskwood
 4812,Icecrown Citadel
 4813,Pit of Saron
 4820,Halls of Reflection
+4823,The Darkened Bank
 4832,Transport: Alliance Gunship (IGB)
 4833,Transport: Horde Gunship (IGB)
+4842,Duskwood
 4859,The Frozen Throne
 4862,The Frozen Halls
 4889,The Frost Queen's Lair
@@ -2317,6 +2368,18 @@
 5005,Demon's Tears
 5006,Sty'La
 5031,Twin Peaks
+5159,Zeppelin Tower
+5219,Westfall
+5220,Westfall
+5301,Ashenvale
+5366,Xorthal's Lair
+5387,The Barrens
+5412,Longshore
+5458,Gold Road
+5497,Zeppelin Tower
+5520,Remnants of Thel’dralor
+5614,Westfall
+5615,Westfall
 5680,Wildhammer Flag Room
 5681,Dragonmaw Flag Room
 5775,Dragonmaw Stronghold
@@ -2375,6 +2438,7 @@
 7011,Noran Mine
 7012,Haunted Valley
 7107,Hillsbrad Foothills
+7717,Vardrheim
 8442,Amphitheater of Anguish
 8443,The Inventor's Library
 8456,Black Rook Hold Arena
@@ -2382,6 +2446,8 @@
 8458,Ashamane's Fall
 8462,Baradin Hold Arena
 8463,Obelisk of the Stars
+9998,DEBUGGING_AREA_2
+9999,DEBUGGING_AREA
 10000,Underworld
 10001,Underworld
 10002,Astaroth
@@ -2398,13 +2464,13 @@
 10013,Mish Faramos
 10014,Dungeon Dev Map
 10015,Raid Dev Map
-10016,Azzar Faire Mini Games
+10016,Azzar Faire MiniGames
 10017,Housing Human
 10018,Newnerub
-10019,Azzar Island
+10019,Sea of Azzar
 10020,Ocean Battle
 10021,To Northrend
-10022,Dreamlike Dream
+10022,Inevitable Future
 10023,Frozen Reach
 10024,Frozen Sepulcher
 10025,Kau'ki Village
@@ -2450,9 +2516,9 @@
 10067,MinigamesDevMap
 10068,AzzarEvent
 10069,Bullet Romper
-10070,Eye of the Shadow
+10070,Shadow Eye
 10071,Duck Hunt
-10072,RainBow Race
+10072,Rainbow Race
 10073,Vertical Ascend
 10074,Kul Tiran Ascent
 10075,Mechagnomic Ascent
@@ -2468,15 +2534,15 @@
 10085,Cursed Vrykul Ruins
 10086,Infested Ruins
 10087,Ancient Vrykul Cathedral
-10088,Ala’Taclar
+10088,Ala'Taclar
 10089,Great Temple of the Sleeper
 10090,City of Azdalar
 10091,Last Burial Ground
 10092,Crypt of the Skeptic
 10093,Beach Bar
 10094,Showmen's Alley
-10095,Snail Race Alley
-10096,Azzar’fon Mountain
+10095,Slime Speedway
+10096,Azzar'fon Mountain
 10097,RobinDevMap
 10098,Emerald Ascent
 10099,Naga Ascent
@@ -2485,41 +2551,152 @@
 10102,Zandalari Ascent
 10103,Legion Ascent
 10104,Frozen Tears Sanctum
-10105,Frozen Tears Sanctum - First floor
-10106,Frozen Tears Sanctum - Second floor
-10107,Frozen Tears Sanctum - Third floor
+10105,Chamber of Rituals
+10106,Forge of Tears
+10107,Lair of Tiris
 10108,Tinkertech Showdown
 10109,Baradin Hold
 10110,Dawnrise Island
+10111,Helyas revenge (general area)
+10112,Wonka Wonka!
+10113,Caverns of Time
+10114,Blackrock Mountain
+10115,Blackrock Mountain
+10116,Maraudon
+10117,Stillpine Hold
+10118,Night Web's Hollow
+10119,Gol'Bolar Quarry
+10120,Coldridge Pass
+10121,The Grizzled Den
+10122,Frostmane Hold
+10123,Skull Rock
+10124,Fargodeep Mine
+10125,Fargodeep Mine
+10126,Jasperlode Mine
+10127,Amani Catacombs
+10128,Palemane Rock
+10129,The Venture Co. Mine
+10130,Echo Ridge Mine
+10131,The Noxious Lair
+10132,The Gaping Chasm
+10133,Ban'ethil Barrow Den
+10134,The Slithering Scar
+10135,The Deadmines
+10136,Gold Coast Quarry
+10137,Jangolode Mine
+10138,Northshire Valley
+10139,Coldridge Valley
+10140,Deathknell
+10141,Sunstrider Isle
+10142,Ammen Vale
+10143,Shadowglen
+10144,Valley of Trials
+10145,Caverns of Time
+10146,Red Cloud Mesa
+10147,The Spring
+10148,The Gorge
+10149,The Cauldron
+10150,The Undermarket
+10151,Duchess' Suite
+10152,Patriarchs' Grotto
+10153,Shaded Echo Tavern
+10154,[PH] Barco alianza
+10155,[PH] Stormwind Sewer Room
+10156,ADT Dev Map
+10157,[PH] The Dry Homes 1
+10158,[PH] The Dry Homes 2
+10159,[PH] The Dry Homes 3
+10160,[PH] The Dry Homes 4
+10161,Horde Infiltration Camp
+10162,Orgrimmar Depths
+10163,Fading Island
+10164,Whispering Coast
+10165,Pilgrims’ Cove
+10166,Eyirhold
+10167,Runeheap
+10168,Eyiren Lighthouse
+10169,Gondola Highpoint
+10170,Aspirants’ Cliffs
+10171,Gharna Graveyard
+10172,Mistcoast Beach
+10173,Old Salthillyen
+10174,Sunken Ruins of Salthillyen
+10175,Zin-N’zothi
+10176,Whim’s Hamlet
+10177,Abyssal Meadows
+10178,Smoldering Gorge
+10179,Luminescent Abyss
+10180,Duskglen Forest
+10181,Kirin Tor Tower
+10182,Darkandle Grand Burrow
+10183,Benttoe Burrow
+10184,Coughsnort Burrow
+10185,Wiggleteeth Burrow
+10186,Favor Town
+10187,Fastfuse Open-Pit Mine
+10188,Aureic Bloom
+10189,Hardluck
+10190,Fastfure Company Outskirts
+10191,Fastfuse Company
+10192,Jagged Coast
+10193,Alzar’din Ruins
+10194,Concord
+10195,Old Northshire Village
+10196,Shadewell Spring
+10197,Secret Inquisitorial Dungeon
+10198,Cain Family Estate
+10199,Cain Family Manor
+10200,Cain Family Crypt
+10201,Crash Site
+10202,Runestone Forest
+10203,Radiance Town
+10204,Zeb'Goro
+10205,Sinister Lair
+10206,The Eyrie
+10207,Moonlit Ossuary
+10208,The Carrion Path
+10209,Grimtotem Mountain Path
+10210,Hard Basin
+10211,Three Totem Village
+10212,Whitebeard's Encampment
+10213,Theren-Dion Sanctuary
+10214,Iris Sanctuary Summit 
+10215,Queen Lianne's Rosewalk
+10216,Brightwater Docks
+10217,Spada Family Manor
+10218,Vaults of the Inquisition
+10219,Road to De Other Side
+10220,Temple of the Wounded Womb
+10221,Trade District
+10222,Old town
+10223,Mage Quarter
+10224,The Park
+10225,Cathedral Square
+10226,Dwarven District
+10227,The Canals
+10228,Valley of Strength
+10229,Valley of Honor
+10230,Cleft of Shadow
+10231,Valley of Spirits
+10232,Valley of Wisdom
+10233,Azga Necromancer Dungeon
+10234,Vulture Cult Sanctuary Dungeon
+10235,The Scarab Wall
+10236,Azuregos (PvE)
+10237,Throne of the Doom Lord
+10238,Master’s Gastric Pit
+10239,Depthbreaker's Hollow
+10240,Depthbreaker's Hollow
+10271,Bough Shadow
+10272,Dream Bough
+10273,Seradane
+10274,Twilight Grove
+10279,Snowgrave's Cavern
+10280,Snowgrave's Cavern
+10281,Zul'Mashar
+10421,Charstone Keep
+11108,The Forgotten Coast
 11211,Ascension
-11220,Stormwind City
-11221,Orgrimmar
-11222,Leaving Stormwind
-11224,Leaving Orgrimmar
-11226,Stormwind Harbour
-11228,Valley of Trials
-11231,Camp Narache
-11234,Red Cloud Mesa
-11235,Kodo Rock
-11237,Brambleblade Ravine
-11238,Shadowglen
-11241,Aldrassil
-11242,Northshire Valley
-11244,Northshire Vineyards
-11246,Echo Ridge Mine
-11247,Coldridge Valley
-11248,Coldridge Pass
-11249,Deathknell
-11250,Sunstrider Isle
-11253,Shrine of Dath'Remar
-11254,Ammen Vale
-11255,Crash Site
-11256,The Sacred Grove
-11257,Ammen Fields
-11258,Silverline Lake
-11259,Nestlewood Thicket
-11260,Nestlewood Hills
-11261,Shadow Ridge
 11425,The Altar of Eternity
 11426,Lumber Mill
 11427,Temple of Eternity
@@ -2534,3 +2711,5 @@
 11437,The Forgotten Isle
 11439,Eonar's Cradle
 11440,The Karazhan Crypts
+13979,The Frozen Sea
+13980,Stranglethorn Vale

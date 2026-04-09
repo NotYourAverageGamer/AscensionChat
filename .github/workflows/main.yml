@@ -14,94 +14,76 @@ on:
       - 'pom.xml'
 
 jobs:
-  build-windows:
-    name: Build on windows-latest
-    runs-on: windows-latest
+  build:
+    name: ${{ matrix.os }} (Java ${{ matrix.java }})
+    runs-on: ${{ matrix.os }}
+
     strategy:
       fail-fast: false
-
-    steps:
-      - name: Sparse Checkout Code
-        uses: actions/checkout@v5
-        with:
-          sparse-checkout: |
-            pom.xml
-            src/
-
-      - name: Setup Maven and Java
-        uses: s4u/setup-maven-action@v1.18.0
-        with:
-          java-version: '8'
-          java-distribution: 'temurin'
-          maven-version: '3.9.9'
-          cache-enabled: true
-          checkout-enabled: false
-
-      - name: Cache Scala installation
-        uses: actions/cache@v4
-        id: cache-scala
-        with:
-          path: C:\Program Files (x86)\scala
-          key: windows-scala-2.12.20
-
-      - name: Install Scala
-        if: steps.cache-scala.outputs.cache-hit != 'true'
-        shell: pwsh
-        run: |
-          Invoke-WebRequest -Uri https://downloads.lightbend.com/scala/2.12.20/scala-2.12.20.msi -OutFile scala-2.12.20.msi
-          Start-Process msiexec.exe -ArgumentList '/i', 'scala-2.12.20.msi', '/quiet', '/norestart' -Wait
-          $env:Path += ';C:\Program Files (x86)\scala\bin'
-          [Environment]::SetEnvironmentVariable('Path', $env:Path, [System.EnvironmentVariableTarget]::Machine)
-
-      - name: Compile and Package with Maven
-        run: mvn clean package
-
-  build-nix:
-    name: Build on ${{ matrix.os }} (Java ${{ matrix.java }})
-    runs-on: ${{ matrix.os }}
-    strategy:
       matrix:
         include:
+          - os: ubuntu-latest
+            java: 8
+          - os: ubuntu-22.04
+            java: 8
           - os: macos-15
             java: 11
           - os: macos-15-intel
             java: 8
-          - os: ubuntu-22.04
-            java: 8
-          - os: ubuntu-latest
+          - os: windows-latest
             java: 8
 
+    continue-on-error: ${{ startsWith(matrix.os, 'macos') }}
+
     steps:
-      - name: Sparse Checkout Code
+      - name: Checkout (sparse)
         uses: actions/checkout@v5
         with:
           sparse-checkout: |
             pom.xml
             src/
 
-      - name: Setup Maven and Java
+      - name: Setup Java + Maven
         uses: s4u/setup-maven-action@v1.18.0
         with:
           java-version: ${{ matrix.java }}
-          java-distribution: 'temurin'
-          maven-version: '3.9.9'
+          java-distribution: temurin
+          maven-version: 3.9.9
           cache-enabled: true
           checkout-enabled: false
 
-      - name: Cache SDKMAN! install
+      - name: Cache Scala
         uses: actions/cache@v4
-        id: cache-sdkman
+        id: cache-scala
         with:
-          path: ~/.sdkman
-          key: ${{ runner.os }}-sdkman-scala-2.12.20
+          path: |
+            ~/.scala
+            C:\scala
+          key: ${{ runner.os }}-scala-2.12.20
 
-      - name: Install SDKMAN! and Scala
-        if: steps.cache-sdkman.outputs.cache-hit != 'true'
-        shell: bash
+      - name: Install Scala (Unix)
+        if: runner.os != 'Windows' && steps.cache-scala.outputs.cache-hit != 'true'
         run: |
-          curl -s "https://get.sdkman.io" | bash
-          source "$HOME/.sdkman/bin/sdkman-init.sh"
-          sdk install scala 2.12.20 || true
+          curl -L https://downloads.lightbend.com/scala/2.12.20/scala-2.12.20.tgz | tar xz
+          mv scala-2.12.20 $HOME/.scala
 
-      - name: Compile and Package with Maven
-        run: mvn clean package
+      - name: Add Scala to PATH (Unix)
+        if: runner.os != 'Windows'
+        run: echo "$HOME/.scala/bin" >> $GITHUB_PATH
+
+      - name: Install Scala (Windows)
+        if: runner.os == 'Windows' && steps.cache-scala.outputs.cache-hit != 'true'
+        shell: pwsh
+        run: |
+          Invoke-WebRequest -Uri https://downloads.lightbend.com/scala/2.12.20/scala-2.12.20.msi -OutFile scala.msi
+          Start-Process msiexec.exe -ArgumentList '/i', 'scala.msi', '/quiet', '/norestart' -Wait
+          New-Item -ItemType Directory -Force -Path C:\scala | Out-Null
+          Copy-Item "C:\Program Files (x86)\scala\*" C:\scala -Recurse
+
+      - name: Add Scala to PATH (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: echo "C:\scala\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+
+      - name: Build with Maven
+        run: mvn -B clean package

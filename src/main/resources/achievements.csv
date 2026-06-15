@@ -4699,6 +4699,22 @@
 9387,Nightmare Mode Realm First! Ascended: Broodlord Lashlayer (25 Player)
 9388,Nightmare Mode Realm First! Ascended: Chromaggus (25 Player)
 9389,Nightmare Mode Realm First! Ascended: Nefarian (25 Player)
+9390,Xarthos
+9391,Heroic: Xarthos
+9392,Ascended: Xarthos (10 Player)
+9393,Ascended: Xarthos (25 Player)
+9394,Realm First! Xarthos
+9395,Realm First! Heroic: Xarthos
+9396,Realm First! Ascended: Xarthos (10 Player)
+9397,Realm First! Ascended: Xarthos (25 Player)
+9398,Nightmare Mode Xarthos
+9399,Nightmare Mode Heroic: Xarthos
+9400,Nightmare Mode Ascended: Xarthos (10 Player)
+9401,Nightmare Mode Ascended: Xarthos (25 Player)
+9402,Nightmare Mode Realm First! Xarthos
+9403,Nightmare Mode Realm First! Heroic: Xarthos
+9404,Nightmare Mode Realm First! Ascended: Xarthos (10 Player)
+9405,Nightmare Mode Realm First! Ascended: Xarthos (25 Player)
 9501,Entered Felforged
 9502,Felforged Level 30
 9503,Felforged Level 40
@@ -11910,6 +11926,10 @@
 24382,Nightmare Mode Realm First! Mythic: Broodlord Lashlayer
 24383,Nightmare Mode Realm First! Mythic: Chromaggus
 24384,Nightmare Mode Realm First! Mythic: Nefarian
+24385,Mythic: Xarthos
+24386,Realm First! Mythic: Xarthos
+24387,Nightmare Mode Mythic: Xarthos
+24388,Nightmare Mode Realm First! Mythic: Xarthos
 24402,Heroic: More Dots!
 24403,Heroic: Many Whelps! Handle It!
 24404,Heroic: She Deep Breaths More
@@ -15569,11 +15589,13 @@
 109322,Ascended: Broodlord Lashlayer
 109323,Ascended: Chromaggus
 109324,Ascended: Nefarian
+109325,Ascended: Xarthos
 109360,Nightmare Mode Ascended: Razorgore the Untamed
 109361,Nightmare Mode Ascended: Vaelastrasz the Corrupt
 109362,Nightmare Mode Ascended: Broodlord Lashlayer
 109363,Nightmare Mode Ascended: Chromaggus
 109364,Nightmare Mode Ascended: Nefarian
+109365,Nightmare Mode Ascended: Xarthos
 109759,Ascended: Prophet Skeram
 109760,Ascended: Bug Family
 109761,Ascended: Battleguard Sartura
@@ -17204,6 +17226,7 @@
 122019,Hero's Call: Black Temple
 122020,Hero's Call: Zul'Aman
 122021,Hero's Call: Sunwell Plateau
+122222,455 New Race Customizations
 123001,Fully Mystic Enchanted
 123002,Activate a Legendary Mystic Enchant
 123003,Activate 3 Epic Mystic Enchants
@@ -17256,6 +17279,8 @@
 150008,Realm First! Level 60 Paladin
 150009,Realm First! Level 60 Druid
 150010,Realm First! Level 60 Shaman
+150011,World First! Ascended Blackwing Lair (25 Player)
+150012,Conqueror of Blackwing Lair
 150020,Realm First! Woodcutting Apprentice
 150021,Realm First! Woodcutting Journeyman
 150022,Realm First! Woodcutting Expert
